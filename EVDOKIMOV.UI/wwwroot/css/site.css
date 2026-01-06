@@ -1,0 +1,12 @@
+header, footer {
+    background-color: rgba(var(--bs-dark-rgb));
+}
+
+.nav-color {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+/*стоимость и рубли будут одного цвета с иконкой корзины*/
+.navbar .nav-color {
+    color: rgba(255, 255, 255, 0.5);
+}
