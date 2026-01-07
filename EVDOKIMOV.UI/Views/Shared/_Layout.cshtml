@@ -17,7 +17,7 @@
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <!-- меню сайта -->
                 <!--подключение разметки меню из файла _MenuPartial.cshtml-->
-                <partial name="_MenuPartial" />
+                @await Component.InvokeAsync("Menu")
                 <!-- меню сайта - конец -->
                 <!-- информация пользователя -->
                 <!--подключение разметки информации пользователя из файла _UserInfoPartial.cshtml-->

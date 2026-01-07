@@ -16,4 +16,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EVDOKIMOV.Domain\EVDOKIMOV.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
