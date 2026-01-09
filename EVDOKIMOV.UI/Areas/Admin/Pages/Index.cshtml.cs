@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using EVDOKIMOV.Domain.Entities;
 using EVDOKIMOV.UI;
 using EVDOKIMOV.UI.Services.ProductService;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EVDOKIMOV.UI.Areas.Admin.Pages
 {
+    [Authorize(Policy = "admin")]
     public class IndexModel(IProductService productService) : PageModel
     {
         // private readonly EVDOKIMOV.UI.TempContext _context;
@@ -20,7 +22,7 @@ namespace EVDOKIMOV.UI.Areas.Admin.Pages
         //    _context = context;
         //}
 
-        public IList<Dish> Dish { get;set; } = default!;
+        public IList<Dish> Dish { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
