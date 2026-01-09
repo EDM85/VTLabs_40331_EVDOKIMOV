@@ -17,7 +17,7 @@ namespace EVDOKIMOV.Domain.Models
         // сообщение в случае неуспешного завершения
         public string? ErrorMessage { get; set; } = string.Empty;
         /// <summary>
-        /// Успешный ответ
+        /// успешный ответ
         /// </summary>
         /// <param name="data">передаваемые данные</param>
         /// <returns></returns>
@@ -26,9 +26,9 @@ namespace EVDOKIMOV.Domain.Models
             return new ResponseData<T> { Data = data };
         }
         /// <summary>
-        /// Ошибка
+        /// ошибка
         /// </summary>
-        /// <param name="message">Текст сообщения об ошибке</param>
+        /// <param name="message">текст сообщения об ошибке</param>
         /// <returns></returns>
         public static ResponseData<T> Error(string message)
         {
