@@ -1,0 +1,6 @@
+@EVDOKIMOV.API_HostAddress = http://localhost:5130
+
+GET {{EVDOKIMOV.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

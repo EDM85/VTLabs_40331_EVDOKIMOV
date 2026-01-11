@@ -37,9 +37,16 @@ builder.Services.AddAuthorization(opt =>
 
 builder.Services.AddSingleton<IEmailSender, NoOpEmailSender>();
 
-// Add custom services (����������� �������� ��� scoped)
-builder.Services.AddScoped<ICategoryService, MemoryCategoryService>();
-builder.Services.AddScoped<IProductService, MemoryProductService>();
+// Add custom services (scoped)
+//builder.Services.AddScoped<ICategoryService, MemoryCategoryService>();
+//builder.Services.AddScoped<IProductService, MemoryProductService>();
+
+// API Services registration
+builder.Services.AddHttpClient<IProductService, ApiProductService>(opt =>
+    opt.BaseAddress = new Uri("https://localhost:7002/api/dishes/"));
+
+builder.Services.AddHttpClient<ICategoryService, ApiCategoryService>(opt =>
+    opt.BaseAddress = new Uri("https://localhost:7002/api/categories/"));
 
 var app = builder.Build();
 

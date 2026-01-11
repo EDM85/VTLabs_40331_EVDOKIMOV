@@ -6,40 +6,61 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EVDOKIMOV.Domain.Entities;
-using EVDOKIMOV.UI;
+using EVDOKIMOV.UI.Services.ProductService;
+using EVDOKIMOV.UI.Services.CategoryService;
 
 namespace EVDOKIMOV.UI.Areas.Admin.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly EVDOKIMOV.UI.TempContext _context;
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
 
-        public CreateModel(EVDOKIMOV.UI.TempContext context)
+        public CreateModel(IProductService productService, ICategoryService categoryService)
         {
-            _context = context;
+            _productService = productService;
+            _categoryService = categoryService;
         }
 
-        public IActionResult OnGet()
-        {
-        ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-            return Page();
-        }
+        public SelectList Categories { get; set; } = default!;
 
         [BindProperty]
-        public Dish Dish { get; set; } = default!;
+        public Dish Dish { get; set; } = new();
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; } // <-- ДОБАВЛЕНО для загрузки файла
+
+        public async Task OnGetAsync()
+        {
+            // получаем категории через сервис API
+            var categoriesResponse = await _categoryService.GetCategoryListAsync();
+            Categories = new SelectList(categoriesResponse.Data, "Id", "Name");
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                // перезагружаем список категорий при ошибке валидации
+                var categoriesResponse = await _categoryService.GetCategoryListAsync();
+                Categories = new SelectList(categoriesResponse.Data, "Id", "Name");
                 return Page();
             }
 
-            _context.Dishes.Add(Dish);
-            await _context.SaveChangesAsync();
+            // отправляем данные через API сервис
+            var result = await _productService.CreateProductAsync(Dish, ImageFile);
 
-            return RedirectToPage("./Index");
+            if (result.Success)
+            {
+                return RedirectToPage("./Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", result.ErrorMessage);
+                var categoriesResponse = await _categoryService.GetCategoryListAsync();
+                Categories = new SelectList(categoriesResponse.Data, "Id", "Name");
+                return Page();
+            }
         }
     }
 }
