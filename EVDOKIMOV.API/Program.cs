@@ -27,11 +27,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapStaticAssets();
-
-app.UseAuthorization();
+// app.MapStaticAssets();
 
 app.UseStaticFiles();
+
+app.UseAuthorization();
 
 app.MapControllers();
 

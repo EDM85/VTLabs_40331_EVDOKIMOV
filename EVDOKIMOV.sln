@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVDOKIMOV.Domain", "EVDOKIM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVDOKIMOV.API", "EVDOKIMOV.API\EVDOKIMOV.API.csproj", "{36C4F521-26D3-44EF-B2E8-622BBB3CE051}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVDOKIMOV.Blazor", "EVDOKIMOV.Blazor\EVDOKIMOV.Blazor.csproj", "{6CD62C32-3D8F-49BE-B82B-E9B04A110D5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{36C4F521-26D3-44EF-B2E8-622BBB3CE051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36C4F521-26D3-44EF-B2E8-622BBB3CE051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36C4F521-26D3-44EF-B2E8-622BBB3CE051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CD62C32-3D8F-49BE-B82B-E9B04A110D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CD62C32-3D8F-49BE-B82B-E9B04A110D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CD62C32-3D8F-49BE-B82B-E9B04A110D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CD62C32-3D8F-49BE-B82B-E9B04A110D5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

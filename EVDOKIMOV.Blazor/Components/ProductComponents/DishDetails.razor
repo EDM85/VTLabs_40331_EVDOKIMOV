@@ -1,0 +1,16 @@
+﻿@if (Dish != null)
+{
+    <div class="card mt-4" style="width: 18rem;">
+        <img src="@Dish.Image" class="card-img-top" />
+        <div class="card-body">
+            <h5 class="card-title">@Dish.Name</h5>
+            <p class="card-text">@Dish.Description</p>
+            <span class="badge bg-info">@Dish.Calories калорий</span>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Dish Dish { get; set; }
+}

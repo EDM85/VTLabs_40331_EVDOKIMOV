@@ -1,0 +1,49 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+
+<h3>Список блюд</h3>
+
+@if (ProductService.Products == null || !ProductService.Products.Any())
+{
+    <p>Загрузка...</p>
+}
+else
+{
+    <table class="table table-striped">
+        @foreach (var dish in ProductService.Products)
+        {
+            <tr>
+                <td>@dish.Name</td>
+                <td>
+                    <button class="btn btn-outline-dark"
+                            @onclick="() => OnDishSelected(dish.Id)">
+                        Подробно
+                    </button>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@code {
+    [CascadingParameter]
+    public IProductService<Dish> ProductService { get; set; }
+
+    [Parameter]
+    public EventCallback<int> DishSelected { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ProductService.ListChanged += StateHasChanged;
+    }
+
+    async Task OnDishSelected(int id)
+    {
+        await DishSelected.InvokeAsync(id);
+    }
+
+    public void Dispose()
+    {
+        ProductService.ListChanged -= StateHasChanged;
+    }
+}

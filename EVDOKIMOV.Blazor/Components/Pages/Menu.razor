@@ -1,0 +1,27 @@
+﻿@page "/menu"
+@rendermode InteractiveServer
+
+<h3>Меню</h3>
+
+<CascadingValue Value="ProductService">
+    <DishesList DishSelected="ShowDetails"/>
+</CascadingValue>
+
+<DishDetails Dish="SelectedDish" />
+
+@code {
+    [Inject]
+    IProductService<Dish> ProductService { get; set; }
+
+    Dish SelectedDish;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ProductService.GetProducts();
+    }
+
+    void ShowDetails(int id)
+    {
+        SelectedDish = ProductService.Products.First(d => d.Id == id);
+    }
+}
